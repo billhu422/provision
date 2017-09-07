@@ -6,6 +6,7 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const OAuth2 = require('./lib/oauth2').OAuth2
+const util = require('util')
 const config = require('./config')
 
 const fetch = require('./routes/fetch')
@@ -25,6 +26,14 @@ app.use(require('koa-static')(__dirname + '/public'))
 app.use(views(__dirname + '/views', {
   extension: 'ejs'
 }))
+
+app.use(function (req, res, next) {
+  util.log(('---NEW REQUEST---'));
+  console.log(util.format(chalk.red('%s: %s %s'), 'REQUEST ', req.method, req.path));
+  console.log(util.format(chalk.yellow('%s: %s'), 'QUERY   ', util.inspect(req.query)));
+  console.log(util.format(chalk.cyan('%s: %s'), 'BODY    ', util.inspect(req.body)));
+  next();
+});
 
 // logger
 app.use(async (ctx, next) => {

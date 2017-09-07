@@ -1,5 +1,5 @@
 var config = {}
-
+config.dbConnection = 'mysql://sequelize_test:sequelize_test@192.168.87.152:8999/sequelize_test';
 config.oauth = {
     account_server: 'http://124.251.62.217:8000',
     //account_server: 'http://192.168.87.152:8000',
@@ -24,9 +24,34 @@ config.qcloud = {
     SecretKey: 'mLjxwgDVebNtEKEvPeePuBCxTjlopfGg',
 };
 
+config.qcloud.key = {
+    secretId: 'AKID2sYy826AMHzTjoMHemobCcXHm47vLoul',
+    secretKey: 'mLjxwgDVebNtEKEvPeePuBCxTjlopfGg',
+};
+config.qcloud.apiParamsMapping = {
+    secretId: 'SecretId',
+    signature: 'Signature',
+    signatureMethod: 'SignatureMethod',
+    timestamp: 'Timestamp',
+    nonce:'Nonce',
+};
+
 config.aliyun = {
     SecretId: 'LTAIzgYvg0hVfNMK',
     SecretKey: '3ExrKEf611ODomcjdpWus8mX4JIsJ4',
+};
+
+config.aliyun.key = {
+    SecretId: 'LTAIzgYvg0hVfNMK',
+    SecretKey: '3ExrKEf611ODomcjdpWus8mX4JIsJ4',
+};
+
+config.aliyun.apiParamsMapping = {
+    SecretId: 'AccessKeyId',
+    signature: 'Signature',
+    signatureMethod: 'SignatureMethod',
+    timestamp: 'Timestamp',
+    nonce:'SignatureNonce'
 };
 
 module.exports = config;

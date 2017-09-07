@@ -7,7 +7,7 @@ const  rp = require('request-promise');
 const randomstring = require("randomstring");
 const vreq = require('../lib/validateReq');
 const qs = require('querystring');
-router.prefix('/v1/hybrid/qcloud')
+router.prefix('/v1/hybrid/service')
 
 var checkBodyRequired = function (ctx,field) {
     if(ctx.request.body[field] == undefined) {

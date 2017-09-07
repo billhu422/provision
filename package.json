@@ -26,6 +26,11 @@
     "object-assign": "^4.1.1",
     "request-promise":"^4.2.1",
     "querystring":"^0.2.0",
-    "randomstring":"^1.1.5"
+    "randomstring":"^1.1.5",
+    "dot-qs":"^0.2.0",
+    "sequelize": "^4.8.0",
+    "tedious":"^2.0.0",
+    "mysql2":"^1.4.2",
+    "javascript-state-machine":"^3.0.1s"
   }
 }
