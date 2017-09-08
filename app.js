@@ -4,16 +4,18 @@ const views = require('koa-views')
 const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
-const logger = require('koa-logger')
 const morgan = require('koa-morgan')
-const OAuth2 = require('./lib/oauth2').OAuth2
+const chalk = require('chalk')
 const util = require('util')
-const config = require('./config')
 
+const OAuth2 = require('./lib/oauth2').OAuth2
+const config = require('./config')
+const utils = require('./lib/utils')
 const fetch = require('./routes/fetch')
 const service = require('./routes/service')
-const utils = require('./lib/utils')
-const chalk = require('chalk')
+const db = require('./models');
+
+
 
 var debug = (process.env.NODE_ENV == 'debug'? 'debug': undefined)
 morgan.token('date', function(){
@@ -69,6 +71,7 @@ asyncOauthGet= async(url,accessToken)=>{
     return oauthGet;
 }
 //init database
+
 
 
 app.use(async(ctx, next) => {
