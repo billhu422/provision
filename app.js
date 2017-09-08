@@ -5,12 +5,20 @@ const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
+const morgan = require('koa-morgan')
 const OAuth2 = require('./lib/oauth2').OAuth2
 const util = require('util')
 const config = require('./config')
 
 const fetch = require('./routes/fetch')
 const service = require('./routes/service')
+const utils = require('./lib/utils')
+const chalk = require('chalk')
+
+var debug = (process.env.NODE_ENV == 'debug'? 'debug': undefined)
+morgan.token('date', function(){
+  return new Date().toLocaleString()
+})
 
 // error handler
 onerror(app)
@@ -20,28 +28,25 @@ app.use(bodyparser({
   enableTypes:['json', 'form', 'text']
 }))
 app.use(json())
-app.use(logger())
+app.use(morgan(':date :method :url :status :res[content-length] - :response-time ms'));
 app.use(require('koa-static')(__dirname + '/public'))
 
 app.use(views(__dirname + '/views', {
   extension: 'ejs'
 }))
 
-app.use(function (req, res, next) {
-  util.log(('---NEW REQUEST---'));
-  console.log(util.format(chalk.red('%s: %s %s'), 'REQUEST ', req.method, req.path));
-  console.log(util.format(chalk.yellow('%s: %s'), 'QUERY   ', util.inspect(req.query)));
-  console.log(util.format(chalk.cyan('%s: %s'), 'BODY    ', util.inspect(req.body)));
-  next();
-});
+//logger
+if(debug) {
+    app.use(async (ctx, next) => {
+        const start = new Date();
+        await next();
+        const ms = new Date() - start
+        util.log(util.format(chalk.red('%s: %s %s - %sms'), 'REQUEST ', ctx.method, ctx.url, ms));
+        util.log(util.format(chalk.cyan('%s: %s'), 'BODY    ', util.inspect(ctx.request.body)));
+    });
+}
 
-// logger
-app.use(async (ctx, next) => {
-  const start = new Date()
-  await next()
-  const ms = new Date() - start
-  console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
-})
+//init OauthSDK
 var oauth_client = new OAuth2(config.client_id,
                     config.client_secret,
                     config.account_server,
@@ -53,42 +58,42 @@ asyncOauthGet= async(url,accessToken)=>{
     let oauthGet = await new Promise(function(resolve,reject){
         oauth_client.get(url, accessToken,function(e,response){
             if (e) {
-               console.log(e);
                 e.status = e.statusCode;
                 e.message = e.data;
                reject(e);
             }else{
-                //console.log(response.toString());
                 resolve(response.toString());
             }
         });
     });
     return oauthGet;
 }
+//init database
+
 
 app.use(async(ctx, next) => {
     try{
-            console.log('Validating user authorization token' );
+            if(debug) console.log('Validating user authorization token' );
             var access_token = ctx.request.get('Authorization').split(" ")[1];
             var url = config.oauth.account_server + '/user';
 
-            var startOauth = new Date();
+            if(debug) var startOauth = new Date();
             let user = await asyncOauthGet(url, access_token);
-            var msOauth = new Date() - startOauth;
-            console.log(`Validate AccessToken - ${msOauth}ms`)
+            if(debug) var msOauth = new Date() - startOauth;
+            if(debug) console.log(`Validate AccessToken - ${msOauth}ms`)
 
             //console.log(user);
-            if(JSON.parse(user).email != config.oauth.username) ctx.throw(400, {message:{code : -3, description : 'User\'s role is not seller(admin)'}});
+            if(JSON.parse(user).id != config.biz.oauth.username) ctx.throw(400, {message:utils.buildResponse(-3, 'User\'s role is not seller(admin)')});
         }
         catch (ex){
-            console.log(ex);
+            util.log(util.format(chalk.red('%s %s'),'EXCEPTION',JSON.stringify(ex)));
             ctx.status = parseInt(ex.status,10);
             switch (ctx.status) {
                 case 404:
-                    ctx.body = {code:-1, description:'Access Token not found'};
+                    ctx.body = utils.buildResponse(-1,'Access Token not found');
                     break;
                 case 401:
-                    ctx.body = {code:-2, description:'Invalid Access Token'};
+                    ctx.body = utils.buildResponse(-2,'Invalid Access Token');
                     break;
                 default: {
                     ctx.body = ex.message;
@@ -96,7 +101,6 @@ app.use(async(ctx, next) => {
             }
             return;
         }
-
         await next();
 });
 

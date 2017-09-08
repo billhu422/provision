@@ -1,0 +1,238 @@
+//service api url: http://124.251.62.215:8000/DSProductCatalog/api/catalogManagement/v2/serviceSpecification/1
+{
+    "id": "1",
+    "version": "0.2",
+    "href": "http://124.251.62.215:8000/DSProductCatalog/api/catalogManagement/v2/serviceSpecification/1:(0.2)",
+    "name": "CVM 内部上线服务",
+    "description": "用于腾讯CVM上线服务",
+    "lastUpdate": "2017-09-07T05:25:13.000+0000",
+    "lifecycleStatus": "Launched",
+    "validFor": {
+        "startDateTime": "2017-06-13T00:00:00.000+0000"
+    },
+    "brand": "腾讯",
+    "attachment": [
+        {
+            "id": "22",
+            "href": "http://serverlocation:port/documentManagement/attachment/22",
+            "type": "Picture",
+            "url": "http://file.caigou2003.com/p/2016-11-30/192ca20c90b9f1a4b8fb472b3843d199.jpg"
+        }
+    ],
+    "relatedParty": [
+        {
+            "id": "bbb",
+            "href": "http://124.251.62.215:8000/DSPartyManagement/api/partyManagement/v2/individual/bbb",
+            "role": "Owner"
+        }
+    ],
+    "serviceSpecCharacteristic": [
+        {
+            "id": "TC-Inner-CVM-Onboard-serviceProvider",
+            "name": "serviceProvider",
+            "description": "服务供应商",
+            "validFor": {
+                "startDateTime": "2017-06-13T00:00:00.000+0000"
+            },
+            "valueType": "string",
+            "configurable": false,
+            "serviceSpecCharacteristicValue": [
+                {
+                    "valueType": "string",
+                    "value": "qcloud",
+                    "unitOfMeasure": "",
+                    "valueFrom": "",
+                    "valueTo": "",
+                    "validFor": {
+                        "startDateTime": "2017-06-13T00:00:00.000+0000"
+                    },
+                    "default": true
+                }
+            ]
+        },
+        {
+            "id": "TC-Inner-CVM-Onboard-serviceName",
+            "name": "serviceName",
+            "description": "服务名称",
+            "validFor": {
+                "startDateTime": "2017-06-13T00:00:00.000+0000"
+            },
+            "valueType": "string",
+            "configurable": false,
+            "serviceSpecCharacteristicValue": [
+                {
+                    "valueType": "string",
+                    "value": "cvm",
+                    "unitOfMeasure": "",
+                    "valueFrom": "",
+                    "valueTo": "",
+                    "validFor": {
+                        "startDateTime": "2017-06-13T00:00:00.000+0000"
+                    },
+                    "default": true
+                }
+            ]
+        },
+        {
+            "id": "TC-Inner-CVM-Onboard-endpooint",
+            "name": "endpoint",
+            "description": "终端地址",
+            "validFor": {
+                "startDateTime": "2017-06-13T00:00:00.000+0000"
+            },
+            "valueType": "string",
+            "configurable": true,
+            "serviceSpecCharacteristicValue": [
+                {
+                    "valueType": "string",
+                    "value": "http://cvm.api.qcloud.com",
+                    "unitOfMeasure": "",
+                    "valueFrom": "",
+                    "valueTo": "",
+                    "validFor": {
+                        "startDateTime": "2017-06-13T00:00:00.000+0000"
+                    },
+                    "default": true
+                }
+            ]
+        },
+        {
+            "id": "TC-Inner-CVM-Onboard-method",
+            "name": "method",
+            "description": "操作方法",
+            "validFor": {
+                "startDateTime": "2017-06-13T00:00:00.000+0000"
+            },
+            "valueType": "string",
+            "configurable": false,
+            "serviceSpecCharacteristicValue": [
+                {
+                    "valueType": "string",
+                    "value": "POST",
+                    "unitOfMeasure": "",
+                    "valueFrom": "",
+                    "valueTo": "",
+                    "validFor": {
+                        "startDateTime": "2017-06-13T00:00:00.000+0000"
+                    },
+                    "default": true
+                }
+            ]
+        },
+        {
+            "id": "TC-Inner-CVM-Onboard-uri",
+            "name": "uri",
+            "description": "uri",
+            "validFor": {
+                "startDateTime": "2017-06-13T00:00:00.000+0000"
+            },
+            "valueType": "string",
+            "configurable": false,
+            "serviceSpecCharacteristicValue": [
+                {
+                    "valueType": "string",
+                    "value": "/v2/index.php",
+                    "unitOfMeasure": "",
+                    "valueFrom": "",
+                    "valueTo": "",
+                    "validFor": {
+                        "startDateTime": "2017-06-13T00:00:00.000+0000"
+                    },
+                    "default": true
+                }
+            ]
+        },
+        {
+            "id": "TC-Inner-CVM-Onboard-timestampFormat",
+            "name": "timestampFormat",
+            "description": "时间格式",
+            "validFor": {
+                "startDateTime": "2017-06-13T00:00:00.000+0000"
+            },
+            "valueType": "string",
+            "configurable": false,
+            "serviceSpecCharacteristicValue": [
+                {
+                    "valueType": "string",
+                    "value": "UNIX",
+                    "unitOfMeasure": "",
+                    "valueFrom": "",
+                    "valueTo": "",
+                    "validFor": {
+                        "startDateTime": "2017-06-13T00:00:00.000+0000"
+                    },
+                    "default": true
+                }
+            ]
+        },
+        {
+            "id": "TC-Inner-CVM-Onboard-signatureMethod",
+            "name": "signatureMethod",
+            "description": "签名格式",
+            "validFor": {
+                "startDateTime": "2017-06-13T00:00:00.000+0000"
+            },
+            "valueType": "string",
+            "configurable": false,
+            "serviceSpecCharacteristicValue": [
+                {
+                    "valueType": "string",
+                    "value": "HmacSHA1-sha1",
+                    "unitOfMeasure": "",
+                    "valueFrom": "",
+                    "valueTo": "",
+                    "validFor": {
+                        "startDateTime": "2017-06-13T00:00:00.000+0000"
+                    },
+                    "default": true
+                }
+            ]
+        },
+        {
+            "id": "TC-Inner-CVM-Onboard-region",
+            "name": "Region",
+            "description": "地区",
+            "validFor": {
+                "startDateTime": "2017-06-13T00:00:00.000+0000"
+            },
+            "valueType": "string",
+            "configurable": false,
+            "serviceSpecCharacteristicValue": [
+                {
+                    "valueType": "string",
+                    "value": "bj",
+                    "unitOfMeasure": "",
+                    "valueFrom": "",
+                    "valueTo": "",
+                    "validFor": {
+                        "startDateTime": "2017-06-13T00:00:00.000+0000"
+                    },
+                    "default": true
+                }
+            ]
+        },
+        {
+            "id": "TC-Inner-CVM-Onboard-action",
+            "name": "Action",
+            "description": "操作",
+            "validFor": {
+                "startDateTime": "2017-06-13T00:00:00.000+0000"
+            },
+            "valueType": "string",
+            "configurable": false,
+            "serviceSpecCharacteristicValue": [
+                {
+                    "valueType": "string",
+                    "value": "DescribeInstances",
+                    "unitOfMeasure": "",
+                    "valueFrom": "",
+                    "valueTo": "",
+                    "validFor": {
+                        "startDateTime": "2017-06-13T00:00:00.000+0000"
+                    },
+                    "default": true
+                }
+            ]
+        }
+    ]
+}

@@ -20,6 +20,7 @@
     "koa-onerror":"^3.1.0",
     "koa-bodyparser":"^4.2.0",
     "koa-logger":"^3.0.1",
+    "koa-morgan":"^1.0.1",
     "koa-router":"^7.2.1",
     "koa-static":"^4.0.1",
     "request": "^2.81.0",
@@ -31,6 +32,7 @@
     "sequelize": "^4.8.0",
     "tedious":"^2.0.0",
     "mysql2":"^1.4.2",
-    "javascript-state-machine":"^3.0.1s"
+    "javascript-state-machine":"^3.0.1s",
+    "chalk":"^2.1.0"
   }
 }

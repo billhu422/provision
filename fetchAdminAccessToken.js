@@ -14,7 +14,7 @@ var options = {
     'Authorization' : 'Basic ' + base64,
     'Content-Type' : 'application/x-www-form-urlencoded'
   },
-  form: {'grant_type':'password','username':'laoguo.cn@gmail.com','password':'12345'}
+  form: {'grant_type':config.biz.oauth.grant_type,'username':config.biz.oauth.email,'password':config.biz.oauth.password}
 };
 console.log(options);
 request.post(options, function(err,httpResponse,body){
